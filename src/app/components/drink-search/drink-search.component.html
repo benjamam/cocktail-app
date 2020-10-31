@@ -1,0 +1,9 @@
+<label>Enter cocktail:
+    <input type="text" [formControl]="drinkSearch">
+</label>
+<div>
+    <p>Or use a preset</p>
+    <button (click)="preset('margarita')">Margarita</button>
+</div>
+
+<p>Value: {{ drinkSearch.value }}</p>

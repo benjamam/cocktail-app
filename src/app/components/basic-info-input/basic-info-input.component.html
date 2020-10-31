@@ -1,0 +1,12 @@
+<form [formGroup]="profile" (ngSubmit)="onSubmit()">
+    <div
+        *ngIf="profile.controls.favoriteLiquor.errors?.required && (profile.controls.favoriteLiquor.touched || profile.controls.favoriteLiquor.dirty || submitAttempted)">
+        Favorite liquor is required
+    </div>
+    <select formControlName="favoriteLiquor">
+        <option value="" disabled>Chose your liquor</option>
+        <option *ngFor="let liquor of liquorList" [ngValue]="liquor">{{ liquor }}</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<br /><br />

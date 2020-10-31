@@ -1,0 +1,11 @@
+<div class="card" *ngFor="let drink of (drinkResults$ | async)">
+    <img class="card-img-top drink-img" src="{{drink.imgUrl}}">
+    <div class="card-body">
+        <h5 class="card-title">{{ drink.name }}</h5>
+        <ul>
+            <li *ngFor="let ingredient of drink.ingredients">{{ ingredient }}</li>
+        </ul>
+        <p>{{ drink.instructions }}</p>
+        <button class="btn btn-link" *ngIf="!drink.instructions" (click)="searchId(drink.id)">Learn more</button>
+    </div>
+</div>
