@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BasicInfoInputComponent } from './components/basic-info-input/basic-info-input.component';
 import { DrinkResultsComponent } from './components/drink-results/drink-results.component';
 import { IngredientSearchComponent } from './components/ingredient-search/ingredient-search.component';
+import { DetailedDrinkViewComponent } from './components/detailed-drink-view/detailed-drink-view.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { IngredientSearchComponent } from './components/ingredient-search/ingred
     DrinkSearchComponent,
     BasicInfoInputComponent,
     DrinkResultsComponent,
-    IngredientSearchComponent
+    IngredientSearchComponent,
+    DetailedDrinkViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

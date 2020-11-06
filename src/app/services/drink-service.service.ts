@@ -12,6 +12,9 @@ export class DrinkService {
   private drinkServiceSource: BehaviorSubject<Cocktail[]> = new BehaviorSubject([]);
   public drinkSource$ = this.drinkServiceSource.asObservable();
 
+  private detailedDrinkServiceSource: BehaviorSubject<Cocktail[]> = new BehaviorSubject([]);
+  private detailedDrinkSource$ = this.detailedDrinkServiceSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getCocktails(liquor: string): Observable<Cocktail[]> {
@@ -23,10 +26,12 @@ export class DrinkService {
   }
 
   getDrinkById(id: string): Observable<Cocktail[]>{
-    return this.makeDrinkRequest(cocktailLookupURL, 'i', id);
+    return this.makeDrinkRequest(cocktailLookupURL, 'i', id, true);
   }
 
-  private makeDrinkRequest(cocktailURL: string, query: string, param: string): Observable<Cocktail[]> {
+  // todo: refactor this for getAll requests vs req for specific drink
+  // or - append current behavior subject with new drinks as they come
+  private makeDrinkRequest(cocktailURL: string, query: string, param: string, isDetailedDrinkReq?: boolean): Observable<Cocktail[]> {
     let fullUrl = `${cocktailURL}${query}=${param}`;
     return this.http.get<Cocktail[]>(fullUrl).pipe(
       map((r: any) => r.drinks),
@@ -49,7 +54,13 @@ export class DrinkService {
 
         return cocktail;
       })),
-      tap(resp => this.drinkServiceSource.next(resp))
+      tap(resp => isDetailedDrinkReq ? this.detailedDrinkServiceSource.next(resp) : this.drinkServiceSource.next(resp))
+    );
+  }
+
+  filter(param: string): Observable<Cocktail[]>{
+    return this.drinkSource$.pipe(
+      map(cocktails => cocktails.filter(c => c.name.toLowerCase().includes(param)))
     );
   }
 

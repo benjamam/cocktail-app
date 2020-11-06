@@ -1,0 +1,10 @@
+<div class="card">
+    <img class="card-img-top drink-img" src="{{ (drink$ | async).imgUrl}}">
+    <div class="card-body">
+        <h5 class="card-title">{{ (drink$ | async).name }}</h5>
+        <ul>
+            <li *ngFor="let ingredient of (drink$ | async).ingredients">{{ ingredient }}</li>
+        </ul>
+        <p>{{ (drink$ | async).instructions }}</p>
+    </div>
+</div>

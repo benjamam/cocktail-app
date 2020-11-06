@@ -1,3 +1,6 @@
+<div *ngIf="wasResults">
+    <input type="text" placeholder="filter" (keydown)="filter($event)">
+</div>
 <div class="card" *ngFor="let drink of (drinkResults$ | async)">
     <img class="card-img-top drink-img" src="{{drink.imgUrl}}">
     <div class="card-body">
